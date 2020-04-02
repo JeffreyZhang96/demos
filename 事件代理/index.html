@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="add">add</button>
+    <div id="parent">
+      <a href="#">a1</a>
+      <a href="#">a2</a>
+      <a href="#">a3</a>
+      <a href="#">a4</a>
+    </div>
+  </body>
+  <script>
+    let parent = document.getElementById("parent");
+    let add = document.getElementById("add");
+    add.addEventListener("click", () => {
+      let a = document.createElement("a");
+      a.href = "#";
+      a.innerHTML = "a" + parent.childNodes.length;
+      parent.appendChild(a);
+    });
+    parent.addEventListener("click", e => {
+      e.preventDefault();
+      if (e.target.nodeName === "A") {
+        alert(e.target.innerHTML);
+      }
+    });
+  </script>
+</html>

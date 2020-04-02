@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draggable</title>
+    <style type="text/css">
+      #draggable {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid #ccc;
+        background: #eee;
+        padding: 10px;
+        cursor: move;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="draggable">Drag Me!</div>
+    <script type="text/javascript">
+      var oDrag = document.getElementById("draggable");
+      var isDraging = false;
+      var startX = 0;
+      var startY = 0;
+      oDrag.addEventListener("mousedown", function(e) {
+        isDraging = true;
+        startX = e.pageX - this.offsetLeft;
+        startY = e.pageY - this.offsetTop;
+      });
+      document.onmouseup = function(e) {
+        isDraging = false;
+      };
+      document.onmousemove = function(e) {
+        var moveX = e.pageX - startX;
+        var moveY = e.pageY - startY;
+        var pageX = document.documentElement.clientWidth - oDrag.offsetWidth;
+        var pageY = document.documentElement.clientHeight - oDrag.offsetHeight;
+        moveX = Math.min(pageX, Math.max(0, moveX));
+        moveY = Math.min(pageY, Math.max(0, moveY));
+        if (isDraging) {
+          oDrag.style.left = moveX + "px";
+          oDrag.style.top = moveY + "px";
+        }
+      };
+    </script>
+  </body>
+</html>

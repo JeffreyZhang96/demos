@@ -49,7 +49,7 @@
       function debounce(fn, delay) {
         let timer;
         return function() {
-          timer && clearTimeout(timer);
+          clearTimeout(timer);
           timer = setTimeout(() => {
             fn.call(this);
           }, delay);
@@ -73,6 +73,7 @@
       input.addEventListener("input", debounce(getData, 300));
       list.addEventListener("click", e => {
         input.value = e.target.innerText;
+        e.currentTarget.innerHTML = "";
       });
     </script>
   </body>
