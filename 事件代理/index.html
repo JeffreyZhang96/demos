@@ -15,17 +15,17 @@
     </div>
   </body>
   <script>
-    let parent = document.getElementById("parent");
-    let add = document.getElementById("add");
-    add.addEventListener("click", () => {
-      let a = document.createElement("a");
-      a.href = "#";
-      a.innerHTML = "a" + parent.childNodes.length;
+    let parent = document.getElementById('parent');
+    let add = document.getElementById('add');
+    add.addEventListener('click', () => {
+      let a = document.createElement('a');
+      a.href = '#';
+      a.innerHTML = 'a' + parent.childNodes.length;
       parent.appendChild(a);
     });
-    parent.addEventListener("click", e => {
+    parent.addEventListener('click', (e) => {
       e.preventDefault();
-      if (e.target.nodeName === "A") {
+      if (e.target.nodeName === 'A') {
         alert(e.target.innerHTML);
       }
     });
