@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="hint.css" />
+    <style>
+      .height {
+        width: 750px;
+        height: 120px;
+      }
+      .static {
+        position: static;
+        width: 360px;
+        height: 360px;
+      }
+      .sticky {
+        /* position: sticky; */
+        width: 240px;
+        height: 90px;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="height"></div>
+    <div class="sticky"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <div class="height"></div>
+    <script>
+      //原生JS实现sticky
+      document.addEventListener('scroll', initHeight);
+      let sticky = document.getElementsByClassName('sticky')[0];
+      function initHeight() {
+        console.log('start');
+        let scrollTop =
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
+        if (scrollTop > 120) {
+          sticky.style.position = 'fixed';
+        } else {
+          sticky.style.position = 'static';
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,20 +1,14 @@
-var minPathSum = function (grid) {
-  let x = grid.length - 1;
-  let y = grid[0].length - 1;
-  return calc(grid, x, y);
-};
+function flattenDeep(arr, num) {
+  return num > 0
+    ? arr.reduce(
+        (pre, cur) =>
+          pre.concat(Array.isArray(cur) ? flattenDeep(cur, num - 1) : cur),
+        []
+      )
+    : arr.slice();
+}
 
-var calc = function (grid, i, j) {
-  if (i == 0 && j == 0) return grid[0][0];
-  if (i == 0) return grid[i][j] + calc(grid, 0, j - 1);
-  if (j == 0) return grid[i][j] + calc(grid, i - 1, 0);
-  return grid[i][j] + Math.min(calc(grid, i - 1, j), calc(grid, i, j - 1));
-};
+let arr = [1, 2, 3, [4, 5, 6, [7, 8]], 9];
 
-console.log(
-  minPathSum([
-    [1, 3, 1],
-    [1, 5, 1],
-    [4, 2, 1],
-  ])
-);
+// console.log(flatten(arr));
+console.log(flattenDeep(arr, 1));

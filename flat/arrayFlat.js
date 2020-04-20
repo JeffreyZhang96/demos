@@ -1,20 +1,48 @@
-// function flatten(arr) {
-//   let res = [];
-//   arr.forEach((item) => {
-//     if (Array.isArray(item)) {
-//       res = res.concat(flatten(item));
-//     } else {
-//       res.push(item);
-//     }
-//   });
-//   return res;
-// }
+function flatten(arr) {
+  let str = JSON.stringify(arr).replace(/\[|\]/g, '');
+  return JSON.parse('[' + str + ']');
+}
+
+function flatten(arr) {
+  let result = [];
+  for (let item of arr) {
+    if (Array.isArray(item)) {
+      result = result.concat(flatten(item));
+    } else {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
+function flatten(arr) {
+  let result = [];
+  function fn(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      let item = arr[i];
+      if (Array.isArray(arr[i])) {
+        fn(item);
+      } else {
+        result.push(item);
+      }
+    }
+  }
+  fn(arr);
+  return result;
+}
 
 function flatten(arr) {
   return arr.reduce(
     (pre, cur) => pre.concat(Array.isArray(cur) ? flatten(cur) : cur),
     []
   );
+}
+
+function flatten(arr) {
+  while (arr.some(Array.isArray)) {
+    arr = [].concat(...arr);
+  }
+  return arr;
 }
 
 function flattenDeep(arr, num) {
