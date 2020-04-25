@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script>
+      Vue.component('grand-child', {
+        props: ['grandChildMsg'],
+        template: `
+            <div @click="clickMsg">
+            {{grandChildMsg}}
+            </div>
+        `,
+        methods: {
+          clickMsg() {
+            this.$emit(
+              'onGrandChildMsg',
+              this.grandChildMsg.split('').reverse().join('')
+            );
+          },
+        },
+      });
+      Vue.component('child', {
+        props: ['childMsg'],
+        template: `
+        <div>
+            <div @click="clickMsg">{{childMsg}}</div>
+            <div>$attrs: {{$attrs}}</div>
+            <div>$listeners: {{$listeners}}</div>
+            <grand-child v-bind="$attrs" v-on="$listeners"></grand-child>
+        </div>
+         `,
+        methods: {
+          clickMsg() {
+            this.$emit(
+              'onChildMsg',
+              this.childMsg.split('').reverse().join('')
+            );
+          },
+        },
+      });
+      Vue.component('parent', {
+        data() {
+          return {
+            childMsg: 'hello child',
+            grandChildMsg: 'hello grand child',
+          };
+        },
+        methods: {
+          onChildMsg(msg) {
+            this.childMsg = msg;
+          },
+          onGrandChildMsg(msg) {
+            this.grandChildMsg = msg;
+          },
+        },
+        template: `
+        <div>
+            <child
+            :notUse="'not-use'"
+            :childMsg="childMsg"
+            :grandChildMsg="grandChildMsg"
+            @onChildMsg="onChildMsg"
+            @onGrandChildMsg="onGrandChildMsg"
+            >
+            </child>
+        </div>
+        `,
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>

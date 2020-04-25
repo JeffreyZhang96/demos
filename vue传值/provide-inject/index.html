@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script>
+      Vue.component('grand-child', {
+        inject: ['pvdChildMsg', 'pvdGrandChildMsg'],
+        template: `
+        <div>
+          <div>grandchild:</div>
+            <div>pvdChildMsg: {{pvdChildMsg}}</div>
+            <div>pvdGrandChildMsg: {{pvdGrandChildMsg}}</div>
+        </div>
+        `,
+      });
+      Vue.component('child', {
+        inject: ['pvdChildMsg', 'pvdGrandChildMsg'],
+        template: `
+        <div>
+            <div>child:</div>
+            <div>pvdChildMsg: {{ pvdChildMsg }}</div>
+            <div>pvdGrandChildMsg: {{pvdGrandChildMsg}}</div>
+            <grand-child></grand-child>
+        </div>
+         `,
+      });
+      Vue.component('parent', {
+        data() {
+          return {
+            childMsg: 'hello child',
+            grandChildMsg: 'hello grand child',
+          };
+        },
+        provide() {
+          return {
+            pvdChildMsg: this.childMsg,
+            pvdGrandChildMsg: this.grandChildMsg,
+          };
+        },
+        template: `
+        <div>
+            <child></child>
+        </div>
+        `,
+        mounted() {
+          setTimeout(() => {
+            this.childMsg = 'hello new child';
+            this.grandChildMsg = 'hello new grandchild';
+          }, 2000);
+        },
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>

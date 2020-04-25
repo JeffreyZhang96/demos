@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script>
+      let bus = new Vue();
+      Vue.prototype.$bus = bus;
+      Vue.component('child1', {
+        data() {
+          return {
+            msgList: [],
+          };
+        },
+        template: `
+        <div>
+            <div>child1</div>
+            <button @click='sendMsg'>发送消息给child2</button>
+            <template v-for='(item,index) in msgList'>
+                <div :key='index'>{{item}}</div>
+            </template>
+        </div>
+        `,
+        mounted() {
+          this.$bus.$on('getMsg1', (res) => {
+            this.msgList.push(res);
+          });
+        },
+        methods: {
+          sendMsg() {
+            this.$bus.$emit(
+              'getMsg2',
+              'hello from1 ' + parseInt(Math.random() * 20)
+            );
+          },
+        },
+      });
+      Vue.component('child2', {
+        data() {
+          return {
+            msgList: [],
+          };
+        },
+        template: `
+        <div>
+            <div>child2</div>
+            <button @click='sendMsg'>发送消息给child1</button>
+            <template v-for='(item,index) in msgList'>
+                <div :key='index'>{{item}}</div>
+            </template>
+        </div>
+        `,
+        mounted() {
+          this.$bus.$on('getMsg2', (res) => {
+            this.msgList.push(res);
+          });
+        },
+        methods: {
+          sendMsg() {
+            this.$bus.$emit(
+              'getMsg1',
+              'hello from2 ' + parseInt(Math.random())
+            );
+          },
+        },
+      });
+      Vue.component('parent', {
+        template: `
+        <div>
+            <child1></child1>
+            <child2></child2>
+        </div>
+        `,
+        destoryed() {
+          this.$bus.$off();
+        },
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>

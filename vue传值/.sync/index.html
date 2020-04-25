@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <parent></parent>
+    </div>
+    <script>
+      Vue.component('child', {
+        props: ['msg', 'num'],
+        template: `
+        <div>
+            <div @click="clickRevert">点击翻转字符串：{{msg}}</div>
+            <div>{{num}}</div>
+            <div @click="clickOpt('add')">+</div>
+            <div @click="clickOpt('sub')">-</div>
+        </div>
+        `,
+        methods: {
+          clickRevert() {
+            this.$emit('update:msg', this.msg.split('').reverse().join(''));
+          },
+          clickOpt(type) {
+            if (type === 'add') {
+              this.$emit('update:num', this.num++);
+            } else if (type === 'sub') {
+              this.$emit('update:num', this.num--);
+            }
+          },
+        },
+      });
+      Vue.component('parent', {
+        data() {
+          return {
+            msg: 'hello everyone guys',
+            num: 0,
+          };
+        },
+        template: `<div>
+            <child :msg.sync="msg" :num.sync='num'></child>
+            </div>`,
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>
