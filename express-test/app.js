@@ -1,85 +1,53 @@
-const express = require("express");
+//
 
-// 本次 http 请求的实例
+const express = require('express');
+
 const app = express();
 
+const sleep = (mseconds) =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      console.log('sleep timeout...');
+      resolve();
+    }, mseconds)
+  );
+
+app.use(async (req, res, next) => {
+  console.log('I am the first middleware');
+  const startTime = Date.now();
+  console.log(`================ start ${req.method} ${req.url}`, {
+    query: req.query,
+    body: req.body,
+  });
+  next();
+  const cost = Date.now() - startTime;
+  console.log(
+    `================ end ${req.method} ${req.url} ${res.statusCode} - ${cost} ms`
+  );
+});
 app.use((req, res, next) => {
-  console.log("请求开始...", req.method, req.url);
+  console.log('I am the second middleware');
   next();
+  console.log('second middleware end calling');
 });
 
-app.use((req, res, next) => {
-  // 假设在处理 cookie
-  req.cookie = {
-    userId: "abc123",
-  };
+app.get('/api/test1', async (req, res, next) => {
+  console.log('I am the router middleware => /api/test1');
+  await sleep(2000);
+  res.status(200).send('hello');
+});
+
+app.use(async (err, req, res, next) => {
+  if (err) {
+    console.log('last middleware catch error', err);
+    res.status(500).send('server Error');
+    return;
+  }
+  console.log('I am the last middleware');
+  await sleep(2000);
   next();
+  console.log('last middleware end calling');
 });
 
-app.use((req, res, next) => {
-  // 假设处理 post data
-  // 异步
-  setTimeout(() => {
-    req.body = {
-      a: 100,
-      b: 200,
-    };
-    next();
-  });
-});
-
-app.use("/api", (req, res, next) => {
-  console.log("处理 /api 路由");
-  next();
-});
-
-app.get("/api", (req, res, next) => {
-  console.log("get /api 路由");
-  next();
-});
-app.post("/api", (req, res, next) => {
-  console.log("post /api 路由");
-  next();
-});
-
-// 模拟登录验证
-function loginCheck(req, res, next) {
-  setTimeout(() => {
-    // console.log("模拟登陆失败");
-    // res.json({
-    //   errno: -1,
-    //   msg: "登录失败",
-    // });
-
-    console.log('模拟登陆成功')
-    next()
-  });
-}
-
-app.get("/api/get-cookie", loginCheck, (req, res, next) => {
-  console.log("get /api/get-cookie");
-  res.json({
-    errno: 0,
-    data: req.cookie,
-  });
-});
-
-app.post("/api/get-post-data", loginCheck, (req, res, next) => {
-  console.log("post /api/get-post-data");
-  res.json({
-    errno: 0,
-    data: req.body,
-  });
-});
-
-app.use((req, res, next) => {
-  console.log("处理 404");
-  res.json({
-    errno: -1,
-    msg: "404 not fount",
-  });
-});
-
-app.listen(3000, () => {
-  console.log("server is running on port 3000");
-});
+app.listen(3000);
+console.log('server listening at port 3000');

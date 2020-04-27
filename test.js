@@ -1,3 +1,5 @@
-Function.prototype.myBind = function (context) {
-  
-};
+var foo = function () {
+  this.name = 'foo';
+}.bind(window);
+
+console.log(foo.name);
