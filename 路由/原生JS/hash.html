@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="#/home">home</a></li>
+      <li><a href="#/about">about</a></li>
+    </ul>
+    <div id="routeView"></div>
+  </body>
+  <script>
+    window.addEventListener('DOMContentLoaded', onLoad);
+    window.addEventListener('hashchange', onHashChange);
+
+    var routeView = null;
+
+    function onLoad() {
+      routeView = document.querySelector('#routeView');
+      onHashChange();
+    }
+    function onHashChange() {
+      switch (location.hash) {
+        case '#/home':
+          routeView.innerText = 'HOME';
+          return;
+        case '#/about':
+          routeView.innerText = 'ABOUT';
+          return;
+        default:
+          return;
+      }
+    }
+  </script>
+</html>

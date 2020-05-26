@@ -13,40 +13,40 @@ function test_shuffle(shuffleFn) {
     j: Array.from({ length: 10 }).fill(0),
   };
   for (let i = 0; i < n; i++) {
-    let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
-    shuffleFn(arr);
-    countObj.a[arr.indexOf('a')]++;
-    countObj.b[arr.indexOf('b')]++;
-    countObj.c[arr.indexOf('c')]++;
-    countObj.d[arr.indexOf('d')]++;
-    countObj.e[arr.indexOf('e')]++;
-    countObj.f[arr.indexOf('f')]++;
-    countObj.g[arr.indexOf('g')]++;
-    countObj.h[arr.indexOf('h')]++;
-    countObj.i[arr.indexOf('i')]++;
-    countObj.j[arr.indexOf('j')]++;
+    let nums = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+    shuffleFn(nums);
+    countObj.a[nums.indexOf('a')]++;
+    countObj.b[nums.indexOf('b')]++;
+    countObj.c[nums.indexOf('c')]++;
+    countObj.d[nums.indexOf('d')]++;
+    countObj.e[nums.indexOf('e')]++;
+    countObj.f[nums.indexOf('f')]++;
+    countObj.g[nums.indexOf('g')]++;
+    countObj.h[nums.indexOf('h')]++;
+    countObj.i[nums.indexOf('i')]++;
+    countObj.j[nums.indexOf('j')]++;
   }
   console.table(countObj);
 }
 
-// function shuffle(arr) {
-//   return arr.sort(() => Math.random() - 0.5);
+// function shuffle(nums) {
+//   return nums.sort(() => Math.random() - 0.5);
 // }
 
-// function shuffle(arr) {
-//   let newArr = arr.map((item) => ({ val: item, ram: Math.random() }));
+// function shuffle(nums) {
+//   let newArr = nums.map((item) => ({ val: item, ram: Math.random() }));
 //   newArr.sort((a, b) => a.ram - b.ram);
-//   arr.splice(0, arr.length, ...newArr.map((i) => i.val));
-//   return arr;
+//   nums.splice(0, nums.length, ...newArr.map((i) => i.val));
+//   return nums;
 // }
 
-function shuffle(arr) {
-  let m = arr.length;
+function shuffle(nums) {
+  let m = nums.length;
   while (m > 1) {
     let index = Math.floor(Math.random() * m--);
-    [arr[m], arr[index]] = [arr[index], arr[m]];
+    [nums[m], nums[index]] = [nums[index], nums[m]];
   }
-  return arr;
+  return nums;
 }
 
 test_shuffle(shuffle);

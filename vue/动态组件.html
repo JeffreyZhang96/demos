@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="changeHeader(1)">第一项</button>
+      <button @click="changeHeader(2)">第二项</button>
+      <button @click="changeHeader(3)">第三项</button>
+      <keep-alive :max="2">
+        <component :is="nowHeader"></component>
+      </keep-alive>
+    </div>
+    <script>
+      let vue = new Vue({
+        el: '#app',
+        data: {
+          nowHeader: 'my-header-1',
+        },
+        components: {
+          'my-header-1': {
+            template: '<div>组件1<input type="text"><div>',
+          },
+          'my-header-2': {
+            template: '<div>组件2<input type="text"><div>',
+          },
+          'my-header-3': {
+            template: '<div>组件3<input type="text"><div>',
+          },
+        },
+        methods: {
+          changeHeader(index) {
+            this.nowHeader = `my-header-${index}`;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

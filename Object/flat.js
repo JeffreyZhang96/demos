@@ -2,19 +2,19 @@ function objectFlat(obj) {
   let result = {};
   function recurse(obj, prop) {
     let type = Object.prototype.toString;
-    if (type.call(obj) == "[object Object]") {
-      if (JSON.stringify(obj) !== "{}") {
+    if (type.call(obj) == '[object Object]') {
+      if (JSON.stringify(obj) !== '{}') {
         for (let p in obj) {
-          recurse(obj[p], prop ? prop + "." + p : p);
+          recurse(obj[p], prop ? prop + '.' + p : p);
         }
       } else {
         result[prop] = {};
       }
-    } else if (type.call(obj) == "[object Array]") {
+    } else if (type.call(obj) == '[object Array]') {
       let len = obj.length;
       if (len > 0) {
         obj.forEach((item, index) => {
-          recurse(item, prop ? prop + "[" + index + "]" : index);
+          recurse(item, prop ? prop + '[' + index + ']' : index);
         });
       } else {
         result[prop] = [];
@@ -23,7 +23,7 @@ function objectFlat(obj) {
       result[prop] = obj;
     }
   }
-  recurse(obj, "");
+  recurse(obj, '');
   return result;
 }
 

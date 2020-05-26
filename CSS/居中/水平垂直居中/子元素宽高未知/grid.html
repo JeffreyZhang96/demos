@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
+      .wrap {
+        width: 800px;
+        height: 800px;
+        background-color: gray;
+        display: grid;
+      }
       .mid {
         width: 400px;
         height: 200px;
         background-color: red;
-        position: absolute;
-        top: 50%;
-        /* margin-top: -100px; */
-        transform: translateY(-50%);
+        justify-self: center;
+        align-self: center;
       }
     </style>
   </head>
   <body>
-    <div class="mid"></div>
+    <div class="wrap">
+      <div class="mid"></div>
+    </div>
   </body>
 </html>
