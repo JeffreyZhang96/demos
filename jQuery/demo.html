@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tab-panels ul {
+        margin: 0;
+        padding: 0;
+      }
+      .tab-panels ul li {
+        list-style-type: none;
+        display: inline-block;
+        background-color: #c67;
+        padding: 3px 10px;
+        border-radius: 10px 10px 0 0;
+        font-weight: 200;
+        cursor: pointer;
+      }
+      .tab-panels ul li:hover {
+        background-color: #666;
+      }
+      .tab-panels ul li.active {
+        background-color: #666;
+      }
+      .tab-panels .panel {
+        display: none;
+        background-color: #c9c9c9;
+        padding: 30px;
+        border-radius: 0 0 10px 10px;
+      }
+      .tab-panels .panel.active {
+        display: block;
+      }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="tab-panels">
+      <ul class="tabs">
+        <li class="active">panel1</li>
+        <li>panel2</li>
+        <li>panel3</li>
+        <li>panel4</li>
+      </ul>
+      <div id="panel1" class="panel active">
+        content1<br />
+        content1<br />
+        content1<br />
+        content1<br />
+      </div>
+      <div id="panel2" class="panel">
+        content2<br />
+        content2<br />
+        content2<br />
+        content2<br />
+      </div>
+      <div id="panel3" class="panel">
+        content3<br />
+        content3<br />
+        content3<br />
+        content3<br />
+      </div>
+      <div id="panel4" class="panel">
+        content4<br />
+        content4<br />
+        content4<br />
+        content4<br />
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $('.tab-panels .tabs li').on('click', function () {
+          $('.tab-panels ul li.active').removeClass('active');
+          let panelToshow = $(this).text();
+          $('.tab-panels .panel.active').slideUp(300);
+          $('#' + panelToshow).slideDown(300, function () {
+            $(this).addClass('active');
+          });
+          $(this).addClass('active');
+        });
+      });
+    </script>
+  </body>
+</html>

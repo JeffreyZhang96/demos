@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+      crossorigin="anonymous"
+    />
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Let's have fun!</h1>
+        <button data-panelId="panel1" class="panel-button btn btn-primary">
+          按钮1
+        </button>
+        <button data-panelId="panel2" class="panel-button btn btn-success">
+          按钮2
+        </button>
+        <button data-panelId="panel3" class="panel-button btn btn-info">
+          按钮3
+        </button>
+        <button data-panelId="panel4" class="panel-button btn btn-warning">
+          按钮4
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <div id="panel1" class="panel panel-primary">
+            <div class="panel-heading">#panel1</div>
+            <div class="panel-body">content</div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div id="panel2" class="panel panel-primary">
+            <div class="panel-heading">#panel2</div>
+            <div class="panel-body">content</div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div id="panel3" class="panel panel-primary">
+            <div class="panel-heading">#panel3</div>
+            <div class="panel-body">content</div>
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div id="panel4" class="panel panel-primary">
+            <div class="panel-heading">#panel4</div>
+            <div class="panel-body">content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $('.panel-button').on('click', function () {
+          let panelId = $(this).attr('data-panelId');
+          $('#' + panelId).toggle();
+        });
+      });
+    </script>
+  </body>
+</html>
