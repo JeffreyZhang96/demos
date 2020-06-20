@@ -1,27 +1,14 @@
-function norepeat(arr) {
-    
+function func() {
+  var cnt = 0;
+  return function () {
+    console.log(cnt++);
+  };
 }
-
-let arr = [
-  false,
-  false,
-  true,
-  true,
-  undefined,
-  undefined,
-  null,
-  null,
-  NaN,
-  NaN,
-  0,
-  0,
-  1,
-  1,
-  { a: 1 },
-  { a: 1 },
-  { b: 1 },
-  '1',
-  '1',
-];
-
-console.log(norepeat(arr));
+let fn = func();
+fn();
+fn();
+fn();
+fn();
+fn();
+fn();
+fn();

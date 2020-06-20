@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 draggable="true" hidden data-name="hello">hello world</h1>
+    <p>用于<mark>高亮</mark>文本</p>
+    <progress max="100" value="70"></progress>
+    <div id="hello"></div>
+    <address>
+      <a href="mailto:384940837@qq.com">384940837@qq.com</a>
+      <a href="tel:+13207140815">13207140815</a>
+    </address>
+    <script>
+      let h = document.getElementsByTagName('h1')[0];
+      console.log(h.dataset.name);
+      h.hidden = false;
+    </script>
+  </body>
+</html>

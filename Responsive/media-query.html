@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      html {
+        font-size: 15px;
+      }
+      body {
+        font-family: Helvetica;
+        margin: 0;
+      }
+      ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+      }
+      ul li {
+        flex: 1;
+        padding: 1rem 0;
+        text-align: center;
+        color: #fff;
+      }
+      @media screen and (max-width: 600px) {
+        ul {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li>Mac</li>
+      <li>iPad</li>
+      <li>iPhone</li>
+      <li>Watch</li>
+      <li>TV</li>
+      <li>Music</li>
+      <li>Support</li>
+    </ul>
+  </body>
+</html>
