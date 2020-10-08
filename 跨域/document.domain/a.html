@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <iframe
+      src="http://b.zzf.cn:3000/b.html"
+      frameborder="0"
+      onload="load()"
+      id="frame"
+    ></iframe>
+    <script>
+      document.domain = 'zzf.cn';
+      function load() {
+        console.log(frame.contentWindow.a);
+      }
+    </script>
+  </body>
+</html>

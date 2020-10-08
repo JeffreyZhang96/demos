@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function show(data) {
+        console.log(data);
+      }
+      let script = document.createElement('script');
+      script.src = 'http://suggestion.baidu.com/su?wd=1&cb=show';
+      show({
+        q: '1',
+        p: false,
+        s: [
+          '1688黄页网',
+          '1公顷等于多少平方米',
+          '122',
+          '1吨等于多少千克',
+          '192.168.1.1 登陆入口',
+          '1平方千米=多少平方米',
+          '1分米等于多少厘米',
+          '1米等于多少分米',
+          '192.168.1.1',
+          '1米等于多少厘米',
+        ],
+      });
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>

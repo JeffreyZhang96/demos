@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: #ffc0cb;
+      }
+      #parent {
+        background-color: #111;
+        border: 1px solid #ff0;
+        width: 240px;
+        /* overflow: auto;
+        display: inline-block; */
+        position: absolute;
+      }
+      #parent div {
+        background-color: #666;
+        border: 1px solid #fff;
+        float: left;
+        width: 100px;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>解决浮动元素令父元素坍塌的问题</p>
+    <div id="parent">
+      <div class="child"></div>
+      <div class="child"></div>
+      <div class="child"></div>
+      <div class="child"></div>
+    </div>
+  </body>
+</html>

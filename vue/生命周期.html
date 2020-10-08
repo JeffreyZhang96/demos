@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{msg}}</p>
+      <button @click="change">切换</button>
+      <comp v-if="isShow"></comp>
+    </div>
+    <template id="comp">
+      <div>
+        <p>我是组件</p>
+      </div>
+    </template>
+    <script>
+      Vue.component('comp', {
+        template: '#comp',
+        data: function () {
+          return {
+            msg: 'comp hello',
+          };
+        },
+        methods: {
+          say() {
+            console.log('comp say');
+          },
+        },
+        beforeDestroy: function () {
+          // 在调用 beforedestroy的时候,表示当前组件即将被销毁了
+          // 注意点:只要组件不被销毁,那么 beforedestroy就不会调用
+          // beforedestroy函数是我们最后能够访问到组件数据和方法的函数
+          console.log('beforeDestroy');
+          console.log(this.msg);
+          console.log(this.say);
+        },
+        destroyed: function () {
+          // 在调用 destroyed的时候,表示当前组件己经被销毁了
+          // 注意点:只要组件不被销毁,那么 destroyed就不会调用
+          // 不要在这个生命周期方法中再去操作组件中数据和方法
+          console.log('destroyed');
+          console.log(this.msg);
+          console.log(this.say);
+        },
+      });
+
+      //MVVM的ViewModel
+      let vue = new Vue({
+        beforeCreate: function () {
+          // 在调用 beforeCreate的时候,仅仅表示Vue实例刚刚被创建出来
+          // 此时此刻还没有初始化好Vue实例中的数据和方法,所以此时此刻还不能访问Vue实例中保存的数据和方法
+          console.log(this.msg);
+          console.log(this.say);
+        },
+        created: function () {
+          // 在调用 created的时候,是我们最早能够访问Vue实例中保存的数据和方法的地方
+          console.log(this.msg);
+          console.log(this.say);
+        },
+        beforeMount: function () {
+          // 在调用 beforeMount的时候,表示Vue已经编译好了最终模板,但是还没有将最终的模板渲染到界面上
+          console.log(document.querySelector('p').innerHTML);
+          console.log(document.querySelector('p').innerText);
+        },
+        mounted: function () {
+          // 在调用 mounted的时候,表示Vue已经完成了模板的渲染,表示我们已经可以拿到界面上渲染之后的内容了
+          console.log(document.querySelector('p').innerHTML);
+          console.log(document.querySelector('p').innerText);
+        },
+        beforeUpdate() {
+          // 在调用 beforeUpdate的时候,表示Vue实例中保存的数据被修改了
+          // 注意点:只有保存的数据被修改了才会调用 beforeUpdate,否则不会调用
+          // 注意点:在调用 beforeupdate的时候,数据已经更新了,但是界面还没有更新
+          console.log('beforeUpdate');
+          console.log(this.msg);
+          console.log(document.querySelector('p').innerHTML);
+          console.log(document.querySelector('p').innerText);
+        },
+        updated() {
+          // 在调用 updated的时候,表示Vue实例中保存的数据被修改了,并且界面也同步了修改的数据了
+          // 也就是说,数据和界面都同步更新之后就会调用undated
+          console.log('updated');
+          console.log(this.msg);
+          console.log(document.querySelector('p').innerHTML);
+          console.log(document.querySelector('p').innerText);
+        },
+        el: '#app',
+        //MVVM的Model
+        data: {
+          msg: 'hello',
+          isShow: true,
+        },
+        methods: {
+          say() {
+            console.log('hello');
+          },
+          change() {
+            this.isShow = !this.isShow;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

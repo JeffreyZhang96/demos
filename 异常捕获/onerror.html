@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      onerror = handleErr;
+      var txt = '';
+      function handleErr(msg, source, lineno, colno, error) {
+        txt = 'There was an error on this page.\n\n';
+        txt += '错误信息: ' + msg + '\n';
+        txt += '发生错误的脚本URL: ' + source + '\n';
+        txt += '发生错误的行数: ' + lineno + '\n\n';
+        txt += '发生错误的列数: ' + colno + '\n\n';
+        txt += 'Click OK to continue.\n\n';
+        alert(txt);
+        return false;
+      }
+      function message() {
+        adddlert('Welcome guest!');
+      }
+    </script>
+  </head>
+
+  <body>
+    <input type="button" value="View message" onclick="message()" />
+  </body>
+</html>

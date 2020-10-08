@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function focusEvent() {
+        //当input获取到焦点时触发
+        console.log('focus');
+      }
+      function blurEvent() {
+        //当input失去焦点时触发，注意：这个事件触发的前提是已经获取了焦点再失去焦点的时候才会触发该事件，用于判断标签为空
+        console.log('blur');
+      }
+      function changeEvent() {
+        //当input失去焦点并且它的value值发生变化时触发，可以用于注册时的确认密码
+        console.log('change');
+      }
+      function keydownEvent() {
+        //按下按键时的事件触发
+        console.log('keydown');
+      }
+      function keyupEvent() {
+        //当按键抬起的时候触发的事件
+        console.log('keyup');
+      }
+      function clickEvent() {
+        //鼠标点击事件
+        console.log('click');
+      }
+      function selectEvent() {
+        //当input里的内容文本被选中后执行，只要选择了就会触发，不是全部选中
+        console.log('select');
+      }
+      function inputEvent() {
+        //当input的value值发生变化时就会触发，（与onchange的区别是不用等到失去焦点就可以触发了）
+        console.log('input');
+      }
+      //document.getElementByTagName('input').onfocus = focusEvent()
+    </script>
+    <input
+      type="text"
+      onfocus="focusEvent()"
+      onblur="blurEvent()"
+      onchange="changeEvent()"
+      onkeydown="keydownEvent()"
+      onkeyup="keyupEvent()"
+      onclick="clickEvent()"
+      onselect="selectEvent()"
+      oninput="inputEvent()"
+    />
+  </body>
+</html>

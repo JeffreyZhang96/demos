@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <span> Message:{{msg}}</span>
+      <span v-once>这个将不会改变: {{ msg }}</span>
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+      <button v-bind:disabled="isButtonDisabled">Button</button>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          msg: '123',
+          rawHtml: "<span style='color:red'>This should be red.</span>",
+          isButtonDisabled: null,
+          // isButtonDisabled: undefined,
+          // isButtonDisabled: false,
+        },
+      });
+    </script>
+  </body>
+</html>

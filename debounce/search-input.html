@@ -43,20 +43,25 @@
       <div class="list"></div>
     </div>
     <script>
-      const dataList = ["中国", "中华民族", "中国人", "中华人民共和国"];
-      const input = document.querySelector(".input");
-      const list = document.querySelector(".list");
+      const dataList = ['中国', '中华民族', '中国人', '中华人民共和国'];
+      const input = document.querySelector('.input');
+      const list = document.querySelector('.list');
+
       function debounce(fn, delay) {
-        let timer;
-        return function() {
-          clearTimeout(timer);
+        let timer = null;
+        return function () {
+          if (timer) {
+            clearTimeout(timer);
+          }
           timer = setTimeout(() => {
-            fn.call(this);
+            fn.apply(this, arguments);
+            timer = null;
           }, delay);
         };
       }
+
       function getData() {
-        list.innerHTML = "";
+        list.innerHTML = '';
         let value = input.value;
         let ret = [];
         for (let item of dataList) {
@@ -64,16 +69,18 @@
             ret.push(item);
           }
         }
-        ret.forEach(item => {
-          let div = document.createElement("div");
+        ret.forEach((item) => {
+          let div = document.createElement('div');
           div.innerText = item;
           list.appendChild(div);
         });
       }
-      input.addEventListener("input", debounce(getData, 300));
-      list.addEventListener("click", e => {
+
+      input.addEventListener('input', debounce(getData, 300));
+
+      list.addEventListener('click', (e) => {
         input.value = e.target.innerText;
-        e.currentTarget.innerHTML = "";
+        e.currentTarget.innerHTML = '';
       });
     </script>
   </body>

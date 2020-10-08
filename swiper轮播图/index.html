@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- https://www.cnblogs.com/learnRoad/p/11270960.html -->
+    <style>
+      .wrapper-container {
+        position: relative;
+        width: 590px;
+        height: 470px;
+        overflow: hidden;
+      }
+      .wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 300%;
+        transition: all 0.5s;
+      }
+      .wrapper img {
+        width: 590px;
+        display: block;
+        float: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper-container">
+      <div class="wrapper" id="wrapper">
+        <img src="./1.webp" alt="" />
+        <img src="./2.webp" alt="" />
+        <img src="./3.webp" alt="" />
+      </div>
+    </div>
+    <script>
+      // 相关变量的初始化
+      let index = 0,
+        dom = document.querySelector('#wrapper'), // 内层盒子
+        wrapper = document.querySelector('.wrapper-container'), // 外层盒子
+        timer = null, // 定时器标记
+        childLength = dom.children.length, // 图片的数量
+        stepWidth = dom.children[0].offsetWidth; // 最外层盒子宽度——对应每次偏移的位置大小
+
+      // 写一个autoPlay的函数
+      function autoPlay() {
+        index++; // 这里++或者是--看自己想轮播往哪个方向走
+        index = index === childLength ? 0 : index; // 这里的判断是 如果index到了最后一张，那就让他回到第一张，达到重复轮播的目的
+        dom.style.left = -index * stepWidth + 'px'; // 这里我给index取反了，是因为我的轮播从左往右轮播，假设一开始偏移值 0 ，第二次偏移值就是 -590px， 第三次就是 -590px * 2
+        timer = setTimeout(autoPlay, 3000);
+      }
+
+      // 写好函数了，调用跑起来
+      timer = setTimeout(autoPlay, 3000); // setTimeout只跑一次，执行到autoPlay函数内部由触发了一次，达到循环播放
+    </script>
+  </body>
+</html>

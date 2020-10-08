@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        function fib(n) {
+          if (n < 2) return n;
+          return fib(n - 1) + fib(n - 2);
+        }
+        console.time('test');
+        fib(40);
+        console.timeEnd('test');
+
+      fetch('./test.wasm')
+        .then((res) => res.arrayBuffer())
+        .then((bytes) => WebAssembly.compile(bytes))
+        .then((mod) => {
+          const instance = new WebAssembly.Instance(mod);
+          const a = instance.exports;
+          //console.log(a);
+          console.time('test');
+          let re = a._Z3fibi(40);
+          console.timeEnd('test');
+        });
+    </script>
+  </body>
+</html>

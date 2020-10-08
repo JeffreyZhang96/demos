@@ -1,6 +1,6 @@
 Promise.all = function (promises) {
   return new Promise((resolve, reject) => {
-    promises = Array.from(promises);
+    // promises = Array.from(promises);
     if (promises.length === 0) {
       resolve([]);
     } else {

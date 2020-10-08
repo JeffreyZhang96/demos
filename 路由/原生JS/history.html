@@ -31,6 +31,7 @@
       );
     }
     function onPopState() {
+      console.log('on');
       switch (location.pathname) {
         case '/home':
           routeView.innerText = 'HOME';
