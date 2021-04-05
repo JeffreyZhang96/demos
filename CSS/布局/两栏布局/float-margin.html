@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>float + margin-left</title>
+    <style>
+      #left {
+        background-color: seagreen;
+        width: 200px;
+        height: 300px;
+        float: left;
+      }
+      #right {
+        background-color: tomato;
+        margin-left: 200px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 优点：实现方式简单
+      缺点：自适应元素margin与定宽元素width需一致-->
+    <div id="left">left</div>
+    <div id="right">right</div>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+		<input v-model.lazy='msg' type="text">
+		<p>{{msg}}</p>
+		<input v-model.number="age" type="number">
+		<p>{{age}}</p>
+		<input v-model.trim="msg">
+		<p>{{msg}}</p>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+		  msg: '',
+		  age:0
+        },
+      });
+    </script>
+  </body>
+</html>

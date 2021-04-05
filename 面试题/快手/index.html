@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      任意打开一个网页如新浪或者百度，写一段js代码找到网页中所有以h或者H开头的元素，并打印每种元素的个数，如网页中含有head,hr
+      和 h2 元素，那么打印出{ hr: 3, h2: 2, head: 1 }
+    </p>
+    <hr />
+    <hr />
+    <hr />
+    <h2></h2>
+    <h2></h2>
+    <script>
+      let html = document.documentElement;
+      let map = {};
+      function print(node) {
+        let children = node.children;
+        if (children) {
+          for (let i = 0; i < children.length; i++) {
+            let name = children[i].tagName.toLowerCase();
+            if (name[0] === 'h') {
+              if (map[name]) {
+                map[name]++;
+              } else {
+                map[name] = 1;
+              }
+            }
+            print(node.children[i]);
+          }
+        }
+      }
+      print(html);
+      console.log(map);
+    </script>
+  </body>
+</html>

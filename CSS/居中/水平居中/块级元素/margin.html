@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #parent {
+        width: 100%;
+        height: 200px;
+        background: #ccc;
+      }
+      #child {
+        width: 200px;
+        height: 200px;
+        background: #c9394a;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="parent">
+      <!-- 优点：只需要对子级元素进行设置就可以实现
+      缺点：如果自己元素脱离文档流，导致margin属性的失效 -->
+      <div id="child">居中布局</div>
+    </div>
+  </body>
+</html>

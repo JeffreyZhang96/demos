@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var urls = [
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting1.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting2.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting3.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting4.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/AboutMe-painting5.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn6.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn7.png',
+        'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmn8.png',
+      ];
+
+      function muiltiRequest(urls, maxNum) {
+        return new Promise((resolve, reject) => {
+          let cur = 0,
+            res = [],
+            urlsTemp = [...urls];
+          function add() {
+            if (urlsTemp.length && cur < maxNum) {
+              cur++;
+              let temp = urlsTemp.shift();
+              fetch(temp)
+                .then((data) => {
+                  res[urls.indexOf(temp)] = data;
+                  cur--;
+                  if (!urlsTemp.length && !cur) {
+                    resolve(res);
+                  } else {
+                    add();
+                  }
+                })
+                .catch((err) => {
+                  reject(err);
+                });
+              add();
+            }
+          }
+          add();
+        });
+      }
+      muiltiRequest(urls, 3);
+    </script>
+  </body>
+</html>

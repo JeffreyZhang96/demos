@@ -12,6 +12,7 @@
       xhr.withCredentials = true;
       xhr.open('PUT', 'http://localhost:4000/getData', true);
       xhr.setRequestHeader('name', 'jeffrey');
+      xhr.setRequestHeader('X-Forwarded-For', '12313123');
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304) {

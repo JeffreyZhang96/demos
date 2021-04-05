@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 在 HTML 中是 kebab-case 的 -->
+      <blog-post post-title="hello!"></blog-post>
+    </div>
+    <script>
+      Vue.component('blog-post', {
+        // 在 JavaScript 中是 camelCase 的
+        props: ['postTitle'],
+        template: `<h3>{{postTitle}}</h3>`,
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>

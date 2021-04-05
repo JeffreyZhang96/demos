@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <current-user>
+        <template v-slot:default="slotProps"
+          >{{slotProps.user.firstName}}</template
+        >
+        <template v-slot:other="otherSlotProps"
+          >slotProps is NOT available here</template
+        >
+      </current-user>
+
+      <current-user v-slot:default="slotProps">
+        {{ slotProps.user.firstName }}
+      </current-user>
+      <current-user v-slot="{ user }"> {{ user.firstName }} </current-user>
+      <current-user v-slot="{ user: person }">
+        {{ person.firstName }}
+      </current-user>
+      <current-user v-slot="{ user = { firstName: 'Guest' } }">
+        {{ user.firstName }}
+      </current-user>
+
+      <!-- 无效，会导致警告 -->
+      <!-- <current-user v-slot="slotProps">
+        {{ slotProps.user.firstName }}
+        <template v-slot:other="otherSlotProps">
+          slotProps is NOT available here
+        </template>
+      </current-user> -->
+    </div>
+    <script>
+      Vue.component('current-user', {
+        data: function () {
+          return {
+            user: {
+              firstName: 'Jeffrey',
+              lastName: 'Zhang',
+            },
+          };
+        },
+        template: `<span>
+            <slot v-bind:user='user'>{{ user.lastName }}</slot>
+            <slot name='other'></slot>
+            </span>`,
+      });
+      new Vue({
+        el: '#app',
+      });
+    </script>
+  </body>
+</html>

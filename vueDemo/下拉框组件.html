@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <my-select :options="options" @change="handleChange"></my-select>
+    </div>
+    <script>
+      Vue.component('my-select', {
+        props: ['options'],
+        template:
+          '<select v-model="option"><option v-for="(item,index) in options" @click="changeIndex(index)>{{item.name}}</option></select>',
+        data: function () {
+          return {
+            option: null,
+          };
+        },
+        methods: {
+          changeIndex() {
+            this.$emit('change', index);
+          },
+        },
+      });
+      new Vue({
+        el: '#app',
+        data: {
+          index: 0,
+          options: [
+            {
+              name: 'time',
+              context: '按时间排序',
+            },
+            {
+              name: 'view',
+              context: '按浏览量排序',
+            },
+            {
+              name: 'like',
+              context: '按点赞数排序',
+            },
+            {
+              name: 'reply',
+              context: '按回复数排序',
+            },
+            {
+              name: 'reward',
+              context: '按打赏数排序',
+            },
+          ],
+        },
+        methods: {
+          handleChange(i) {
+            this.index = i;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- https://www.bilibili.com/video/BV12J41157k8?from=search&seid=3898703226827463950 -->
+  </head>
+  <body>
+    <script>
+      axios({
+        methods: 'get',
+        url: 'https://jsonplaceholder.typicode.com/todos',
+        params: {
+          _limit: 5,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      axios
+        .get('https://jsonplaceholder.typicode.com/todos?_limit=6', {
+          timeout: 5000,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      axios
+        .post('https://jsonplaceholder.typicode.com/todos', {
+          title: 'zzf',
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      axios
+        .put('https://jsonplaceholder.typicode.com/todos/1', {
+          title: 'zzf',
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      axios
+        .delete('https://jsonplaceholder.typicode.com/todos/1')
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+
+      axios
+        .all([
+          (axios.get('https://jsonplaceholder.typicode.com/todos?_limit=6'),
+          axios.get('https://jsonplaceholder.typicode.com/posts?_limit=6')),
+        ])
+        .then(
+          axios.spread((todos, posts) => {
+            console.log(todos, posts);
+          })
+        )
+        .catch((err) => {
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>

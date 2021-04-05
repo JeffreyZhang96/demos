@@ -1,35 +1,35 @@
-class Subject {
+class Dep {
   constructor() {
-    this.observers = [];
+    this.subs = [];
   }
-  addObserver(observer) {
-    this.observers.push(observer);
+  addSub(sub) {
+    this.subs.push(sub);
   }
-  removeObserver(observer) {
-    this.observers.forEach((item, index) => {
-      if (item === observer) {
-        this.observers.splice(index, 1);
+  removeSub(sub) {
+    this.subs.forEach((item, index) => {
+      if (item === sub) {
+        this.subs.splice(index, 1);
       }
     });
   }
   notify(obj) {
-    this.observers.forEach(item => {
+    this.subs.forEach((item) => {
       item.update(obj);
     });
   }
 }
-class Observer {
+class Watcher {
   update(obj) {
     console.log(obj);
   }
 }
 
-let subject = new Subject();
-let observer1 = new Observer();
-let observer2 = new Observer();
+let dep = new Dep();
+let watcher1 = new Watcher();
+let watcher2 = new Watcher();
 
-subject.addObserver(observer1);
-subject.addObserver(observer2);
-subject.notify("gg");
-subject.removeObserver(observer1);
-subject.notify("gl");
+dep.addSub(watcher1);
+dep.addSub(watcher2);
+dep.notify('gg');
+dep.removeSub(watcher1);
+dep.notify('gl');

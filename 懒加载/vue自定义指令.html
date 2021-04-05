@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+      img {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p v-for="img in imgs" :key="img">
+        <img v-lazyload="img" />
+      </p>
+    </div>
+    <script>
+      Vue.directive('lazyload', {
+        bind: function (el, binding) {
+          let lazyLoadObser = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry, index) => {
+              let lazyImage = entry.target;
+              if (entry.isIntersecting) {
+                lazyImage.src = binding.value;
+                lazyLoadObser.unobserve(lazyImage);
+              }
+            });
+          });
+          lazyLoadObser.observe(el);
+        },
+      });
+      new Vue({
+        el: '#app',
+        data: {
+          imgs: [
+            './imgs/nav-1.png',
+            './imgs/nav-2.png',
+            './imgs/nav-3.png',
+            './imgs/nav-4.png',
+            './imgs/nav-5.png',
+            './imgs/nav-6.png',
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>

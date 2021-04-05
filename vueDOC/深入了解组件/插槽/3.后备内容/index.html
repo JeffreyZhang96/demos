@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <submit-button> Save </submit-button>
+    </div>
+    <script>
+      Vue.component('submit-button', {
+        template: `<button type='submit'>
+            <slot>Submit</slot>
+        </button>`,
+      });
+      new Vue({
+        el: '#app',
+        data: {},
+      });
+    </script>
+  </body>
+</html>

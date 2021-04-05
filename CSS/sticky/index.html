@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #parent {
+        height: 2000px;
+        background-color: green;
+      }
+      #child {
+        height: 200px;
+        background-color: hotpink;
+        position: sticky;
+        top: 200px;
+      }
+      #header {
+        height: 500px;
+      }
+      #footer {
+        height: 2000px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header"></div>
+    <div id="parent">
+      <div id="child"></div>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>

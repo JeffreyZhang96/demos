@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        height: 1000vh;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="button">防抖节流</button>
+    <input id="input" type="text" />
+    <script>
+      function debounce(fn, delay) {
+        let timer = null;
+        return function () {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+            timer = null;
+          }, delay);
+        };
+      }
+
+      function throttle(fn, delay) {
+        let timer = null;
+        return function () {
+          if (timer) {
+            return;
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+            timer = null;
+          }, delay);
+        };
+      }
+
+      // function throttle(fn, delay) {
+      //   var prev = Date.now();
+      //   return function () {
+      //     var now = Date.now();
+      //     if (now - prev >= delay) {
+      //       fn.apply(this, arguments);
+      //       prev = Date.now();
+      //     }
+      //   };
+      // }
+
+      function foo() {
+        console.log('trigger');
+      }
+      document
+        .getElementById('input')
+        .addEventListener('input', debounce(foo, 2000));
+      window.addEventListener('resize', debounce(foo, 2000));
+
+      document
+        .getElementById('button')
+        .addEventListener('click', throttle(foo, 2000));
+      window.addEventListener('scroll', throttle(foo, 2000));
+    </script>
+  </body>
+</html>

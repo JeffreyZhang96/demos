@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 动态赋予一个变量的值 -->
+      <blog-post v-bind:title="post.title"></blog-post>
+
+      <!-- 动态赋予一个复杂表达式的值 -->
+      <blog-post v-bind:title="post.title+' by '+post.author.name"></blog-post>
+
+      <!-- 即便 `42` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+      <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+      <blog-post v-bind:likes="42"></blog-post>
+
+      <!-- 用一个变量进行动态赋值。-->
+      <blog-post v-bind:likes="post.likes"></blog-post>
+
+      <!-- 包含该 prop 没有值的情况在内，都意味着 `true`。-->
+      <blog-post is-published></blog-post>
+
+      <!-- 即便 `false` 是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+      <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+      <blog-post v-bind:is-published="false"></blog-post>
+
+      <!-- 用一个变量进行动态赋值。-->
+      <blog-post v-bind:is-published="post.isPublished"></blog-post>
+
+      <!-- 即便数组是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+      <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+      <blog-post v-bind:comment-ids="[234, 266, 273]"></blog-post>
+
+      <!-- 用一个变量进行动态赋值。-->
+      <blog-post v-bind:comment-ids="post.commentIds"></blog-post>
+
+      <!-- 即便对象是静态的，我们仍然需要 `v-bind` 来告诉 Vue -->
+      <!-- 这是一个 JavaScript 表达式而不是一个字符串。-->
+      <blog-post
+        v-bind:author="{name: 'Veronica',company: 'Veridian Dynamics'}"
+      ></blog-post>
+
+      <!-- 用一个变量进行动态赋值。-->
+      <blog-post v-bind:author="post.author"></blog-post>
+
+      <blog-post v-bind="post"></blog-post>
+    </div>
+    <script>
+      Vue.component('blog-post', {
+        props: {
+          title: String,
+          likes: Number,
+          isPublished: Boolean,
+          commentIds: Array,
+          author: Object,
+          callback: Function,
+          contactsPromise: Promise, // or any other constructor
+        },
+        template: `<div>
+        <h3>{{title}}</h3>
+        <h4>{{likes}}</h4>
+        <h5>{{isPublished}}</h5>
+        <h5>{{commentIds}}</h5>
+        <h6>{{author}}</h6>
+        <p>----------------------------------</p>
+        </div>`,
+      });
+      new Vue({
+        el: '#app',
+        data: {
+          post: {
+            title: 'hello!',
+            author: {
+              name: 'zzf',
+              company: 'ty',
+            },
+            likes: 43,
+            isPublished: false,
+            commentIds: [123, 234, 345],
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -11,16 +11,30 @@ class EventEmitter {
   }
   emit(eventName, ...args) {
     this.events[eventName] &&
-      this.events[eventName].forEach(cb => cb.apply(this, args));
+      this.events[eventName].forEach((cb) => cb.apply(this, args));
   }
   remove(eventName, callback) {
     if (this.events[eventName]) {
       this.events[eventName] = this.events[eventName].filter(
-        cb => cb != callback
+        (cb) => cb != callback
       );
     }
   }
-  once(eventName,callback){
-    
-  }
 }
+
+function user1(content) {
+  console.log('用户1订阅了:', content);
+}
+
+function user2(content) {
+  console.log('用户2订阅了:', content);
+}
+
+let eventEmitter = new EventEmitter();
+
+// 订阅
+eventEmitter.on('article', user1);
+eventEmitter.on('article', user2);
+
+// 发布
+eventEmitter.emit('article', '会员服务');

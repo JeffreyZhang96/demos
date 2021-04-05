@@ -5,7 +5,7 @@ app.use((req, res, next) => {
   let origin = req.headers.origin;
   if (whiteList.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Headers', 'name');
+    res.setHeader('Access-Control-Allow-Headers', 'name', 'X-Forwarded-For');
     res.setHeader('Access-Control-Allow-Methods', 'PUT');
     res.setHeader('Access-Control-Max-age', 6);
     res.setHeader('Access-Control-Allow-Credentials', true);

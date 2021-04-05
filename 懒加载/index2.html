@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM实现</title>
+    <style>
+      img {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><img src="./imgs/test.png" data="./imgs/nav-1.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-2.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-3.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-4.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-5.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-6.png" alt="" /></li>
+    </ul>
+  </body>
+  <script>
+    let imgs = document.querySelectorAll('img');
+
+    let clientHeight =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+
+    function lazyLoad() {
+      for (let i = 0; i < imgs.length; i++) {
+        if (imgs[i].getBoundingClientRect().top < clientHeight) {
+          imgs[i].src = imgs[i].getAttribute('data');
+        }
+      }
+    }
+
+    lazyLoad();
+
+    document.addEventListener('scroll', lazyLoad);
+  </script>
+</html>

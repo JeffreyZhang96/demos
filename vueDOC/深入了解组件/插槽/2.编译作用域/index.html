@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue"></script>
+    <link
+      href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <navigation-link url="/profile">
+        Logged in as {{user.name}} Clicking here will send you to: {{ url }}
+      </navigation-link>
+    </div>
+    <script>
+      Vue.component('navigation-link', {
+        props: ['url'],
+        template: `<a v-bind:href="url" class="nav-link"><slot></slot></a>`,
+      });
+      new Vue({
+        el: '#app',
+        data: {
+          user: {
+            name: 'jeffrey',
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

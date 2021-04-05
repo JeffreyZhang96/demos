@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #parent {
+        width: 200px;
+        height: 600px;
+        background-color: #cccd;
+        position: relative;
+      }
+      #child {
+        width: 200px;
+        height: 200px;
+        background-color: #c9394a;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        /* margin-top: -50px; */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 优点：父级元素是否脱离文档流，不影响子级元素居中
+      缺点：transform是CSS3中新增属性，兼容性问题 -->
+    <div id="parent">
+      <div id="child"></div>
+    </div>
+  </body>
+</html>

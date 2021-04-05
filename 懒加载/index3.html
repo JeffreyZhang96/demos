@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><img src="./imgs/test.png" data="./imgs/nav-1.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-2.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-3.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-4.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-5.png" alt="" /></li>
+      <li><img src="./imgs/test.png" data="./imgs/nav-6.png" alt="" /></li>
+    </ul>
+  </body>
+  <script>
+    let imgs = document.querySelectorAll('img');
+
+    let imageObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.src = entry.target.getAttribute('data');
+        }
+      });
+    });
+
+    imgs.forEach((img) => {
+      imageObserver.observe(img);
+    });
+  </script>
+</html>
